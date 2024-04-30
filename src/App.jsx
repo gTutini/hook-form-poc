@@ -1,33 +1,69 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+
+import { Input } from "./components";
+import { schema } from "./schema";
 
 function App() {
-  const [count, setCount] = useState(0);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    watch,
+  } = useForm({
+    resolver: zodResolver(schema),
+  });
+
+  console.log(watch(["email", "password"]));
+
+  const onSubmit = (values) => {
+    console.log("submit:", values);
+  };
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <main className="container">
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        style={{
+          minHeight: "100vh",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          maxWidth: "576px",
+          margin: "auto",
+        }}
+      >
+        <fieldset>
+          <label>
+            Email
+            <Input
+              type="email"
+              name="email"
+              placeholder="Email"
+              autoComplete="email"
+              aria-invalid={!!errors?.email}
+              register={register}
+            />
+            {errors?.email && <small>{errors.email.message}</small>}
+          </label>
+
+          <label>
+            Senha
+            <Input
+              type="password"
+              name="password"
+              placeholder="Senha"
+              autoComplete="password"
+              aria-invalid={!!errors?.password}
+              register={register}
+            />
+            {errors?.password && <small>{errors.password.message}</small>}
+          </label>
+        </fieldset>
+
+        <input type="submit" value="Enviar" />
+      </form>
+    </main>
   );
 }
 
