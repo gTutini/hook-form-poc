@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-import { Input } from "./components";
+import { Input, InputWithForwardRef } from "./components";
 import { schema } from "./schema";
 
 function App() {
@@ -37,7 +37,6 @@ function App() {
           <label>
             Email
             <Input
-              type="email"
               name="email"
               placeholder="Email"
               autoComplete="email"
@@ -49,13 +48,12 @@ function App() {
 
           <label>
             Senha
-            <Input
+            <InputWithForwardRef
               type="password"
-              name="password"
               placeholder="Senha"
               autoComplete="password"
               aria-invalid={!!errors?.password}
-              register={register}
+              {...register("password")}
             />
             {errors?.password && <small>{errors.password.message}</small>}
           </label>
