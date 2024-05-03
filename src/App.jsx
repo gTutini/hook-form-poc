@@ -1,29 +1,14 @@
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-
 import { Input, InputWithForwardRef } from "./components";
-import { schema } from "./schema";
+
+import { useApp } from "./useApp";
 
 function App() {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    watch,
-  } = useForm({
-    resolver: zodResolver(schema),
-  });
-
-  console.log(watch(["email", "password"]));
-
-  const onSubmit = (values) => {
-    console.log("submit:", values);
-  };
+  const { errors, onSubmit, register } = useApp();
 
   return (
     <main className="container">
       <form
-        onSubmit={handleSubmit(onSubmit)}
+        onSubmit={onSubmit}
         style={{
           minHeight: "100vh",
           display: "flex",
