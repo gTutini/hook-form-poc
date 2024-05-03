@@ -7,12 +7,9 @@ function useApp() {
     register,
     handleSubmit,
     formState: { errors },
-    watch,
   } = useForm({
     resolver: zodResolver(schema),
   });
-
-  console.log(watch(["email", "password"]));
 
   const onSubmit = handleSubmit((values) => {
     console.log("submit:", values);
