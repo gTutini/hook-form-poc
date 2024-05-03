@@ -44,7 +44,7 @@ function App() {
           </label>
         </fieldset>
 
-        <input type="submit" value="Enviar" />
+        <button type="submit">Enviar</button>
       </form>
     </main>
   );

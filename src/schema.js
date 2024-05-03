@@ -1,5 +1,5 @@
 import { z } from "zod";
-import isStrongPassword from "validator/es/lib/isStrongPassword";
+import isStrongPassword from "validator/lib/isStrongPassword";
 
 const schema = z.object({
   email: z.string().email("Preencha com um email válido"),

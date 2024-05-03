@@ -13,6 +13,8 @@ function useApp() {
 
   const onSubmit = handleSubmit((values) => {
     console.log("submit:", values);
+
+    return values;
   });
 
   return { register, onSubmit, errors };
