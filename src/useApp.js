@@ -1,5 +1,6 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
+
 import { schema } from "./schema";
 
 function useApp() {
@@ -13,8 +14,6 @@ function useApp() {
 
   const onSubmit = handleSubmit((values) => {
     console.log("submit:", values);
-
-    return values;
   });
 
   return { register, onSubmit, errors };
