@@ -21,7 +21,7 @@ describe("useApp", () => {
       result.current.onSubmit();
     });
 
-    expect(spyConsole).not.toHaveBeenCalledWith("submit:", formValues);
-    expect(spyConsole).not.toHaveBeenCalledTimes(1);
+    expect(spyConsole).toHaveBeenCalledWith("submit:", formValues);
+    expect(spyConsole).toHaveBeenCalledTimes(1);
   });
 });
